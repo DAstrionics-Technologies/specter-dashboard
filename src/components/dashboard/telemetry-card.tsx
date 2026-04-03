@@ -4,11 +4,15 @@ export function TelemetryCard({
   value,
   unit,
   accent = "primary",
+  secondaryValue,
+  secondaryUnit,
 }: {
   label: string;
   icon: string;
   value: string;
   unit: string;
+  secondaryValue?: string;
+  secondaryUnit?: string;
   accent?: "primary" | "secondary";
 }) {
   return (
@@ -19,15 +23,18 @@ export function TelemetryCard({
         </span>
         <span className={`material-symbols-outlined text-${accent} text-lg`}>{icon}</span>
       </div>
-      <div className="flex items-baseline gap-1">
-        <span className="font-headline text-3xl font-black text-on-surface tabular-nums tracking-tighter">
-          {value}
-        </span>
-        {unit && (
-          <span className="text-sm font-bold text-on-surface-variant tracking-wider uppercase">
-            {unit}
+      <div className="flex justify-between items-baseline">
+        <div className="flex items-baseline gap-1">
+          <span className="font-headline text-3xl font-black text-on-surface tabular-nums tracking-tighter">
+            {value}
           </span>
-        )}
+          {unit && (
+            <span className="text-sm font-bold text-on-surface-variant tracking-wider uppercase">
+              {unit}
+            </span>
+          )}
+        </div>
+        <span className="font-medium">{secondaryValue} {secondaryUnit}</span>
       </div>
     </div>
   );

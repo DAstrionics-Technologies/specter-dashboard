@@ -15,7 +15,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col gap-6">
-      <StatusBar />
+      <StatusBar data={data} />
 
       <div className="grid grid-cols-12 gap-6">
         {/* Left Column: Map + Feed */}
