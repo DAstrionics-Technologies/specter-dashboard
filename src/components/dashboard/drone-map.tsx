@@ -7,15 +7,18 @@ import { useMap } from "react-leaflet";
 interface DroneMapProps {
     lat: number | 28.662876;
     lon: number | 77.343407;
+    heading: number;
 }
 
-const droneIcon = L.divIcon({
-    html: `<span class="material-symbols-outlined" style="font-size:32px;color:#4b8eff;font-variation-settings:'FILL'
-    1;">navigation</span>`,
-    className: "",
-    iconSize: [32, 32],
-    iconAnchor: [16, 16],
-})
+function createDroneIcon(heading: number) {
+    return L.divIcon({
+        html: `<span class="material-symbols-outlined" style="font-size:32px;color:#4b8eff;font-variation-settings:'FILL'
+        1;transform:rotate(${heading}deg);">navigation</span>`,
+        className: "",
+        iconSize: [32, 32],
+        iconAnchor: [16, 16],
+    });
+}
 
 function FollowDrone({ lat, lon }: { lat: number; lon: number }) {
     const map = useMap();
@@ -23,7 +26,7 @@ function FollowDrone({ lat, lon }: { lat: number; lon: number }) {
     return null;
 }
 
-export function DroneMap({ lat, lon }: DroneMapProps) {
+export function DroneMap({ lat, lon, heading }: DroneMapProps) {
     return (
 
         <MapContainer
@@ -32,7 +35,7 @@ export function DroneMap({ lat, lon }: DroneMapProps) {
             className="w-full h-full"
         >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker position={[lat, lon]} icon={droneIcon} />
+            <Marker position={[lat, lon]} icon={createDroneIcon(heading)} />
             <FollowDrone lat={lat} lon={lon} />
         </MapContainer>
     )

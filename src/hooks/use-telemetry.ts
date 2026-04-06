@@ -33,8 +33,8 @@ export function useTelemetry(drone_id: string) {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        const url = `http://localhost:8000/api/v1/stream/telemetry?drone_id=${drone_id}`;
-        const eventSource = new EventSource(url);
+        const sseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/stream/telemetry?drone_id=${drone_id}`;
+        const eventSource = new EventSource(sseUrl);
 
         eventSource.onopen = () => {
             dispatch({ type: "OPEN" })
