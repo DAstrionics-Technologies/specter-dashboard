@@ -14,7 +14,7 @@ export default function VideoPlayer({ droneId }: VideoPlayerProps) {
         const video = videoRef.current
         if (!video) return;
 
-        const streamUrl = `${process.env.NEXT_PUBLIC_MEDIA_URL}/live/${droneId}.m3u8`;
+        const streamUrl = `${process.env.NEXT_PUBLIC_MEDIA_URL}/live/${droneId}/index.m3u8`;
 
         if (Hls.isSupported()) {
             const hls = new Hls({
