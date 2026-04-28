@@ -13,11 +13,11 @@ const DroneMap = dynamic(
 
 export default function Dashboard() {
   const droneId = "drone-1"
-  const { data, status, error } = useTelemetry(droneId);
+  const { data, status } = useTelemetry(droneId);
 
   return (
     <div className="flex flex-col gap-6">
-      <StatusBar data={data} />
+      <StatusBar data={data} status={status} />
 
       <div className="grid grid-cols-12 gap-6">
         {/* Left Column: Map + Feed */}
@@ -28,7 +28,7 @@ export default function Dashboard() {
               <DroneMap lat={data.lat} lon={data.lon} heading={data.heading} />
             ) : (
               <div className="flex items-center justify-center w-full h-full text-on-surface-variant/40 font-headline text-sm uppercase tracking-widest">
-                Awaiting telemetry...
+                <DroneMap lat={28.6448} lon={77.2167} heading={0} />
               </div>
             )}
           </div>
@@ -44,7 +44,7 @@ export default function Dashboard() {
 
         {/* Right Column: Telemetry */}
         <div className="col-span-12 lg:col-span-4">
-          <TelemetryPanel data={data} />
+          <TelemetryPanel data={data} status={status} />
         </div>
       </div>
     </div>
