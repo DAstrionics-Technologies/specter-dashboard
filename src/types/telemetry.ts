@@ -13,4 +13,4 @@ export interface TelemetryData {
     satellites: number,
 }
 
-export type ConnectionStatus = "connecting" | "connected" | "disconnected" | "error";
+export type ConnectionStatus = "connecting" | "connected" | "stale" | "error";

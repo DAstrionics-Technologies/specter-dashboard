@@ -1,9 +1,11 @@
-import type { TelemetryData } from "@/types/telemetry";
+import type { TelemetryData, ConnectionStatus } from "@/types/telemetry";
 import { TelemetryCard } from "./telemetry-card";
 
-export function TelemetryPanel({ data }: { data: TelemetryData | null }) {
+export function TelemetryPanel({ data, status }: { data: TelemetryData | null; status: ConnectionStatus }) {
+  const isStale = status !== "connected";
+
   return (
-    <div className="bg-surface-container p-6 rounded">
+    <div className={`bg-surface-container p-6 rounded transition-opacity ${isStale ? "opacity-60" : ""}`}>
       <h3 className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-6 flex items-center gap-2">
         <span className="material-symbols-outlined text-sm">
           settings_input_component

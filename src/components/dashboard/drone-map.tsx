@@ -32,7 +32,7 @@ export function DroneMap({ lat, lon, heading }: DroneMapProps) {
         <MapContainer
             center={[lat, lon]}
             zoom={15}
-            className="w-full h-full"
+            style={{ width: "100%", height: "100%" }}
         >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={[lat, lon]} icon={createDroneIcon(heading)} />
