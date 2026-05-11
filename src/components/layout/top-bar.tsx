@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuth } from "@/contexts/auth-context";
+
 const units = [
   { id: "unit-01", label: "Unit 01", active: true },
   { id: "unit-02", label: "Unit 02" },
@@ -7,6 +9,8 @@ const units = [
 ];
 
 export function TopBar() {
+  const { user, logout } = useAuth();
+
   return (
     <header className="fixed top-0 right-0 left-64 z-40 flex justify-between items-center px-6 h-16 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/15">
       <div className="flex items-center gap-6">
@@ -45,11 +49,27 @@ export function TopBar() {
             notifications
           </span>
         </div>
-        <div className="w-8 h-8 rounded bg-surface-container-highest border border-outline-variant/20 flex items-center justify-center">
-          <span className="material-symbols-outlined text-on-surface-variant text-sm">
-            person
-          </span>
-        </div>
+
+        {user && (
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex flex-col items-end leading-tight">
+              <span className="font-headline tracking-widest uppercase text-xs font-bold text-on-surface">
+                {user.name}
+              </span>
+              <span className="font-body text-xs text-on-surface-variant">
+                {user.email}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => void logout()}
+              title="Sign out"
+              className="w-8 h-8 rounded bg-surface-container-highest border border-outline-variant/20 flex items-center justify-center hover:border-primary hover:text-primary transition-colors text-on-surface-variant cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-sm">logout</span>
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );
